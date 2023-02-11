@@ -1,0 +1,23 @@
+apiVersion: fission.io/v1
+kind: HTTPTrigger
+metadata:
+  creationTimestamp: null
+  name: convert
+  namespace: default
+spec:
+  createingress: false
+  functionref:
+    functionweights: null
+    name: convert
+    type: name
+  host: ""
+  ingressconfig:
+    annotations: null
+    host: '*'
+    path: /convert/{from}/{to}
+    tls: ""
+  method: ""
+  methods:
+  - GET
+  prefix: ""
+  relativeurl: /convert/{from}/{to}

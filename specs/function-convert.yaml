@@ -1,0 +1,55 @@
+include:
+- src/*
+kind: ArchiveUploadSpec
+name: convert-VC9I
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: convert-pkg
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+    type: url
+    url: archive://convert-VC9I
+  environment:
+    name: node
+    namespace: default
+  source:
+    checksum: {}
+status:
+  buildstatus: none
+  lastUpdateTimestamp: "2023-02-11T09:05:39Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: convert
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: poolmgr
+      MaxScale: 0
+      MinScale: 0
+      SpecializationTimeout: 120
+      TargetCPUPercent: 0
+    StrategyType: execution
+  concurrency: 500
+  environment:
+    name: node
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    functionName: handler
+    packageref:
+      name: convert-pkg
+      namespace: default
+  requestsPerPod: 1
+  resources: {}
