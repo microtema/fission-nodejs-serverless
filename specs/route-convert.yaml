@@ -18,6 +18,6 @@ spec:
     tls: ""
   method: ""
   methods:
-  - GET
+  - POST
   prefix: ""
   relativeurl: /convert/{from}/{to}
